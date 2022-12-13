@@ -2,11 +2,11 @@
 arr=()
 
 
-
+: '
 # Add new elements at the end of the array
 arr+=(1)
 arr+=(2)
-arr+=(3)
+arr=(3)'
 
 
 # Generate random index
