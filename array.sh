@@ -2,6 +2,7 @@
 arr=()
 
 
+
 # Add new elements at the end of the array
 arr+=(1)
 arr+=(2)
@@ -11,44 +12,33 @@ arr+=(3)
 # Generate random index
 index=$(shuf -i 0-5 -n 1)
 
+
+# ECHO
 echo arr=${arr[*]} index=$index
 echo -e "\n"
 
 
+while [ ${#arr[*]} -lt 6 ]
+do
+	until [[ ! " ${arr[*]} " =~ " $index " ]]  
+	do	
+		index=$(shuf -i 0-5 -n 1)
+	done
 
-until [[ ! " ${arr[*]} " =~ " $index " ]]  
-do	
-	
-	echo index=$index
-	index=$(shuf -i 0-5 -n 1)
+	arr+=($index)
 done
 
-arr+=($index)
 
-
+# ECHO
 echo -e "\n"
 echo arr=${arr[*]} index=$index
 
 
 
-
-
-: '
-#echo -e "\n"
+echo -e "\n"
 echo ${arr[*]}  All of the items in the array
 echo ${!arr[*]} All of the indexes in the array
 echo ${#arr[*]} Number of items in the array
-echo ${#arr[0]} Length of item zero
-echo ${arr[0]} item zero
-echo ${#arr[1]} Length of item one
-echo ${arr[1]} item one
-echo ${#arr[2]} Length of item two
-echo ${arr[2]} item two
-echo -e "\n"
-echo -e "\n"'
-
-
-
 
 
 
