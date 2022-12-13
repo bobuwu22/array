@@ -11,15 +11,15 @@ echo arr=${arr[*]} index=$index
 echo -e "\n"
 
 
-while [ ${#arr[*]} -lt 6 ]
-do
+if [ ${#arr[*]} -lt 6 ]
+then
 	until [[ ! " ${arr[*]} " =~ " $index " ]]  
 	do	
 		index=$(shuf -i 0-5 -n 1)
 	done
 
 	arr+=($index)
-done
+fi
 
 
 # ECHO
