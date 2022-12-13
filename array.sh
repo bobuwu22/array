@@ -2,40 +2,33 @@
 arr=()
 
 
-# Add new element at the end of the array
+# Add new elements at the end of the array
 arr+=(1)
 arr+=(2)
 arr+=(3)
 
 
 # Generate random index
-index=$(shuf -i 0-10 -n 1)
+index=$(shuf -i 0-5 -n 1)
+
+echo arr=${arr[*]} index=$index
+echo -e "\n"
+
+
+
+until [[ ! " ${arr[*]} " =~ " $index " ]]  
+do	
+	
+	echo index=$index
+	index=$(shuf -i 0-5 -n 1)
+done
+
 arr+=($index)
 
 
-numbers=()
-number=$(shuf -i 0-5 -n 1)
-numbers+=($number)
-
-
-echo numbers=${numbers[*]} number=$number
 echo -e "\n"
+echo arr=${arr[*]} index=$index
 
-
-number=$(shuf -i 0-5 -n 1)
-
-until [[ ! " ${numbers[*]} " =~ " $number " ]]  
-do	
-	
-	echo number=$number
-	number=$(shuf -i 0-5 -n 1)
-done
-
-numbers+=($number)
-
-
-echo -e "\n"
-echo numbers=${numbers[*]} number=$number
 
 
 
