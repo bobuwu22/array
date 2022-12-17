@@ -1,14 +1,57 @@
 json="/home/bob/bin/array/numbers.json"
 arr=$(jq ".array[]" $json)
+len=$(jq "[.array[] | select(.)] | length" numbers.json)
+var=$(shuf -i 0-5 -n 1)
+ocurrences=$(jq "[.array[] | select(. == $var)] | length" $json)
+
 
 echo $arr
-
-
-var=$(shuf -i 0-5 -n 1)
-
+echo $len
 echo $var
+echo $ocurrences
 
-jq "[.array[] | select(. == $var)] | length" $json
+
+
+
+
+
+newjson=$(jq ".array += [$var]" $json)
+
+echo -e "\n"
+echo newjson: $newjson
+echo $newjson > $json
+ 
+
+
+: '
+echo $arr
+echo $len
+echo $var
+echo $ocurrences'
+
+
+
+: '
+if [ $ocurrences -ne 0 ]
+then
+	echo $var is there $ocurrences times
+else
+	echo $var is not there
+fi
+
+
+if [ $len -lt 6 ]
+then
+        until [ $ocurrences -ne 0 ]
+        do
+                var=$(shuf -i 0-5 -n 1)
+        done
+
+        arr+=($index)
+fi'
+
+
+
 
 
 
@@ -21,15 +64,6 @@ jq "[.array[] | select(. == $var)] | length" $json
 
 
 : '
-if [[ " ${arr[*]} " =~ " $var " ]]
-then
-	echo $var is there
-else
-	echo $var is not there
-	#echo -n "$var " >> /home/bob/bin/array/numbers.txt
-fi
-
-
 #echo $arr
 
 
