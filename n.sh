@@ -6,7 +6,7 @@ var=$(shuf -i 0-5 -n 1)
 ocurrences=$(jq "[.array[] | select(. == $var)] | length" $json)
 
 
-
+: '
 if [ $len -lt 6 ]
 then
         until [ $ocurrences -eq 0 ]
@@ -18,6 +18,21 @@ then
         newjson=$(jq ".array += [$var]" $json)
 	echo $newjson > $json
 fi
+
+if [ $len -eq 6 ]
+then 
+	newjson={ "array": [] }
+        echo $newjson
+fi'
+
+
+
+newjson="{ array: [] }"
+echo $newjson
+
+
+
+
 
 
 
