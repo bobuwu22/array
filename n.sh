@@ -1,6 +1,6 @@
 json="/home/bob/bin/array/numbers.json"
 arr=$(jq ".array[]" $json)
-len=$(jq "[.array[] | select(.)] | length" numbers.json)
+len=$(jq "[.array[] | select(.)] | length" $json)
 var=$(shuf -i 0-5 -n 1)
 #var=$(shuf -i 0-5 -n 1)
 ocurrences=$(jq "[.array[] | select(. == $var)] | length" $json)
@@ -24,16 +24,4 @@ then
 	newjson="{ \"array\": [] }"
 	echo $newjson > $json
 fi
-
-
-
-
-
-
-
-
-
-
-
-
 
