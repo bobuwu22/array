@@ -1,9 +1,7 @@
-json="/home/bob/bin/array/numbers.json"
-arr=$(jq ".array[]" $json)
-len=$(jq "[.array[] | select(.)] | length" $json)
-var=$(shuf -i 0-5 -n 1)
-#var=$(shuf -i 0-5 -n 1)
-ocurrences=$(jq "[.array[] | select(. == $var)] | length" $json)
+indices="/home/bob/bin/array/indices.json"
+index=$(shuf -i 0-5 -n 1)
+len=$(jq "[.array[] | select(.)] | length" $indices)
+ocurrences=$(jq "[.array[] | select(. == $index)] | length" $indices)
 
 
 
@@ -11,17 +9,17 @@ if [ $len -lt 6 ]
 then
         until [ $ocurrences -eq 0 ]
         do
-                var=$(shuf -i 0-5 -n 1)
-		ocurrences=$(jq "[.array[] | select(. == $var)] | length" $json)
+                index=$(shuf -i 0-5 -n 1)
+		ocurrences=$(jq "[.array[] | select(. == $index)] | length" $indices)
         done
 
-        newjson=$(jq ".array += [$var]" $json)
-	echo $newjson > $json
+        newindices=$(jq ".array += [$index]" $indices)
+	echo $newindices > $indices
 fi
 
 if [ $len -eq 6 ]
 then 
-	newjson="{ \"array\": [] }"
-	echo $newjson > $json
+	newindices="{ \"array\": [] }"
+	echo $newindices > $indices
 fi
 
